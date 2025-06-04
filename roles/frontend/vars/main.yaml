@@ -1,0 +1,5 @@
+CATALOGUE_HOST: catalogue.devsecops-dt.site
+USER_HOST: user.devsecops-dt.site
+CART_HOST: cart.devsecops-dt.site
+SHIPPING_HOST: shipping.devsecops-dt.site
+PAYMENT_HOST: payment.devsecops-dt.site
