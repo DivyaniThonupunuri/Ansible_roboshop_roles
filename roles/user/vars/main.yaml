@@ -1,0 +1,2 @@
+REDIS_HOST: redis.devsecops-dt.site
+MONGODB_HOST: mongodb.devsecops-dt.site
