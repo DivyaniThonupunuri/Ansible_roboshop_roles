@@ -1,0 +1,5 @@
+- name : configuring "{{ component }}" component
+  hosts: "{{ component }}"
+  become: yes
+  role:
+  - "{{ component }}"
