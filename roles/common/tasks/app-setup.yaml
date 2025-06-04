@@ -3,7 +3,7 @@
     path: /app
     state: directory
   
-- name: craete a "{{ component }}" user 
+- name: craete a roboshop  user 
   ansible.builtin.user:
     name: roboshop
     shell: /sbin/nologin
@@ -11,12 +11,12 @@
     home: /app
 - name: download "{{ component }}" code 
   ansible.builtin.get_url:
-    url : https://roboshop-artifacts.s3.amazonaws.com/"{{ component }}"-v3.zip
+    url : https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip
     dest: /tmp/"{{ component }}".zip
  # this module thinks file exist on ansible control server, needs to extract on to remote machine
  # remote_src: yes means files already exist in "{{ component }}" server
 - name: unarchive the code 
   ansible.builtin.unarchive:
-    src: /tmp/"{{ component }}".zip
+    src: /tmp/{{ component }}.zip
     dest: /app
     remote_src: yes 
