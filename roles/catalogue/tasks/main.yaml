@@ -1,0 +1,43 @@
+  - name: App-setup
+    include_role: 
+      name: common
+      tasks_from: app-setup
+
+  - name: nodejs-setup
+    include_role:
+      name: common
+      tasks_from: nodejs-setup
+
+  - name: systemd-setup
+    include_role:
+      name: common
+      tasks_from: systemd-setup
+        
+  - name: copy mongo repo
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: install mongodb
+    ansible.builtin.dnf:
+      name: mongodb-mongosh
+      state: present
+
+  - name: check products loaded or not 
+    ansible.builtin.command: mongosh --host mongodb.devsecops-dt.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    register: catalogue_output
+
+  - name: verify the command catalogue_output
+    ansible.builtin.debug:
+      msg : "{{ catalogue_output }}"
+
+  - name: load products
+    ansible.builtin.shell: mongosh --host mongodb.devsecops-dt.site < /app/db/master-data.js
+    when: catalogue_output.stdout | int < 0
+
+
+
+
+
+
+
